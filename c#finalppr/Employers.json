@@ -1,0 +1,20 @@
+[
+  {
+    "Id": "144fecce-afd8-40ed-bf31-b026fd6175b3",
+    "Name": "Raver",
+    "Surname": "Group",
+    "City": "Dc",
+    "Phone": "\u002B9874521459",
+    "Age": 46,
+    "vacancies": []
+  },
+  {
+    "Id": "5d7cf496-72c9-444b-8935-c3ee22de046b",
+    "Name": "Eli",
+    "Surname": "Abilov",
+    "City": "Baki",
+    "Phone": "0779121212",
+    "Age": 29,
+    "vacancies": []
+  }
+]
