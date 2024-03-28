@@ -11,6 +11,7 @@ public class Employr
 {
     public Guid Id { get; set; }
     public string Name { get; set; }
+    public string Mail { get; set; }
     public string Surname { get; set; }
     public string City { get; set; }
     public string Phone { get; set; }
@@ -25,7 +26,9 @@ public class Employr
             vacancies[i] = value ?? null;
         }
     }
-    public Employr(string name, string surname, string city, string phone, int age)
+    public List<string> notfy = new List<string>();
+    public List<string> Appliedworkers = new List<string>();
+    public Employr(string name, string surname, string city, string phone, int age,string mail)
     {
         Id = Guid.NewGuid();
         Name = name;
@@ -33,6 +36,7 @@ public class Employr
         City = city;
         Phone = phone;
         Age = age;
+        Mail = Mail;
     }
     public Employr() { }
 

@@ -87,6 +87,10 @@ string[] signInEmployer =
                    "\t\t\t\t => Notifilications",
                    "\t\t\t\t => Exit"
 };
+//bunun apply worker hissesi ilk once notfa baxib gorecekki kimse add cv edib ve o adamin adina uygun cv ni tapmaliyiq 
+// Appliedworkers bu adi otureremdeye rahatca workers.json dan bu ada uygun gelen adamin aftomatik cv si gelecek ve bura girende 
+//bu list var deye ve evvelde all workersi gore bilirdi deye adlar cxmalidir ve hansini isdese onunn adini secib cv sine baxmalidir
+//baxandan sonra ise durub workere mail gedmelidir bda asanndri mail var ve workerin notf si var ve sadece notf qebul edir fsyo 
 string[] filter =
 {
                    "\t\t\t\t => City",
@@ -98,9 +102,9 @@ Admin admin1 = new Admin("mirtalibemirli598@gmail.com","adminm","1234");
 #endregion
 
 //------------------------------------------START-----------------------------------------------------------------
+Firstentering();
+//ApplyCv();
 
-//Firstentering();
-ApplyCv();
 //Managefilter();
 //----------------------------------------------------------------------------------------------------------------
 void mailing(string mail,string ms)
@@ -151,7 +155,46 @@ void mailing(string mail,string ms)
     }
 }
 
+void mailing2(string mail, string ms,string subject)
+{
 
+    string senderEmail = "mirtalibemirli498@gmail.com";
+    string senderPassword = "aytndmgzqcukvmds";
+
+
+    string recipientEmail = mail;
+
+    string smtpServer = "smtp.gmail.com";
+    int smtpPort = 587;
+
+    using (SmtpClient smtpClient = new SmtpClient(smtpServer, smtpPort))
+    {
+        smtpClient.EnableSsl = true;
+
+        smtpClient.Credentials = new NetworkCredential(senderEmail, senderPassword);
+
+        using (MailMessage mailMessage = new MailMessage(senderEmail, recipientEmail))
+        {
+            mailMessage.Subject = subject;
+
+
+            Random random = new Random();
+            int msg = random.Next(0, 100);
+            mailMessage.Body = ms;
+
+
+            try
+            {
+                smtpClient.Send(mailMessage);
+               
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Failed to send email. Error's message: {ex.Message}");
+            }
+        }
+    }
+}
 
 void showmenu1(int selecttt, string[] items)
 {
@@ -173,6 +216,7 @@ void showmenu1(int selecttt, string[] items)
     }
 
 }
+
 void showmenu2(int selecttt, string[] items)
 {
 
@@ -195,6 +239,7 @@ void showmenu2(int selecttt, string[] items)
 
 
 }
+
 int Movemenu(ref int choice, string[] items, ConsoleKeyInfo k, out int sz)
 {
     sz = items.Length;
@@ -253,6 +298,7 @@ int ManageMenu(string[] items)
     }
 }
 
+//-----------------------
 int Managefilter()
 {
     int choice = 0;
@@ -288,11 +334,18 @@ int Managefilter()
 
     return 0;
 }
+
+
 void Firstentering()
 {
 menuadmin1:
     Console.Clear();
-   
+    Console.ForegroundColor = ConsoleColor.Magenta;
+    Console.BackgroundColor = ConsoleColor.Gray;
+    Console.WriteLine("Hello " + Environment.UserName + " welcome to Boss.az");
+    Console.ForegroundColor = ConsoleColor.White;
+    Console.BackgroundColor = ConsoleColor.Black;
+
     int choice = ManageMenu(menuadmin);
 
     if (choice == 0)
@@ -601,7 +654,7 @@ void SignupEmployer()
         mailing(mail1, "Register"   );
         #endregion
 
-        Employr e1 = new Employr(name1, surname1, city, phone1, age1);
+        Employr e1 = new Employr(name1, surname1, city, phone1, age1,mail1);
         Database1<Employr> dbe = new Database1<Employr>("../../../Employers.json");
         dbe.Values.Add(e1 );  
         dbe.SaveData();
@@ -630,7 +683,7 @@ void Exiting()
     Console.Write("."); Thread.Sleep(500);
     Console.Write(".");
     Console.ForegroundColor = ConsoleColor.White;
-    Console.ReadKey();
+    Environment.Exit(0);
 
 }
 
@@ -665,7 +718,6 @@ void regexh(string mes)
     Console.ReadKey(true);
     Console.ForegroundColor = ConsoleColor.White;
 }
-
 
 void SignIn()
 {
@@ -751,11 +803,7 @@ void siginworker()
         {
             k = true;
 
-            /*"```````          
-                               
-                               "\t\t\t\t => Apply vacancie" ,
-                               "\t\t\t\t => Notifilications",
-                               */
+            /*"```````         "\t\t\t\t => Notifilications", */
 
             int choice = ManageMenu(signinworker);
             if (choice == 0)
@@ -768,7 +816,7 @@ void siginworker()
 
             else if (choice == 1)
             {
-                ApplyCv();
+                ApplyCv(item);
             }
             else if (choice == 2)
             {
@@ -886,23 +934,44 @@ Cv AddCv()
     return cv1;
 }
 
-void ApplyCv()
+void ApplyCv(dynamic item1)
 {
     Database1<Employr> dbv = new Database1<Employr>("../../../Employers.json");
     var employers = dbv.Values;
     foreach (var item in employers)
     {
-        Console.WriteLine(item.vacancies);
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine(item.vacancies.ToString());
+        Console.ForegroundColor = ConsoleColor.White;
+
     }
     Console.WriteLine("If you want apply Press 'Enter ' or presss any key and 'Exit'");
    ConsoleKeyInfo kk =  Console.ReadKey(true);
     if (kk.Key == ConsoleKey.Enter)
     {
-        Console.WriteLine("Apply edmek isdediyiniz vacansiyanin id si => ");
+        Console.Write("ID of Vacancie (Please copy and Paste) => ");
         string id = Console.ReadLine();
+        for (int i = 0; i < employers.Count; i++)
+        {
+            var vc = employers.ElementAt(i).vacancies.ToList();
+            for (int j = 0; j < vc.Count; j++)
+            {
+                if (vc.ElementAt(j).Id.ToString() == id)
+                {
+                    string employermessage = $"{item1.Username} is Applied your {vc.ElementAt(j).Work} Vacancie";
+                    employers.ElementAt(i).notfy.Add(employermessage);
+                    employers.ElementAt(i).Appliedworkers.Add(item1.FirstName);
+                   mailing2(employers.ElementAt(i).Mail, employermessage,"You have mail about Vacancies");
+
+                    Console.WriteLine("You applied sucsess");
+                }
+            }
+           
+        }
     }
     else
     {
         return;
     }
+    Resuming();
 }

@@ -12,7 +12,7 @@ public class Worker
     public Worker() { }
     public Cv Cv { get; set; } 
    
-    public Guid Id;
+    public Guid Id { get; set; }
     public string City { get; set; }
     public string Phone { get; set; }
     public int Age { get; set; }
@@ -23,6 +23,7 @@ public class Worker
     public string Pasword { get; set; }
     public DateTime BirthDate { get; init; }
     public string nofc { get; set; }
+    public List<string> notfy = new List<string>();
 
     public Worker(string firstName, string lastName, string email, string username, string pasw, DateTime birthDate, string city, string phone, int age)
     {

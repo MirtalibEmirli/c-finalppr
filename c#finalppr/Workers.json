@@ -1,6 +1,7 @@
 [
   {
-    "Cvs": [],
+    "Cv": null,
+    "Id": "00000000-0000-0000-0000-000000000000",
     "City": "",
     "Phone": "",
     "Age": 19,
@@ -13,7 +14,8 @@
     "nofc": null
   },
   {
-    "Cvs": [],
+    "Cv": null,
+    "Id": "00000000-0000-0000-0000-000000000000",
     "City": "",
     "Phone": "",
     "Age": 2021,
@@ -26,7 +28,8 @@
     "nofc": null
   },
   {
-    "Cvs": [],
+    "Cv": null,
+    "Id": "00000000-0000-0000-0000-000000000000",
     "City": "",
     "Phone": "",
     "Age": 2021,
@@ -39,40 +42,8 @@
     "nofc": null
   },
   {
-    "Cvs": [
-      {
-        "visibility": false,
-        "Specialization": "master",
-        "School": "Banke",
-        "UniversityAdmissionScore": 98,
-        "Skills": "English",
-        "CompaniesWorkedAt": "Pashabank",
-        "StartDate": "2019-04-12T00:00:00",
-        "EndDate": "2019-09-09T00:00:00",
-        "ForeignLanguages": [
-          "English"
-        ],
-        "DifferentiationDiploma": true,
-        "GitHubLink": "sdsfd",
-        "LinkedInProfileLink": "asdf"
-      },
-      {
-        "visibility": false,
-        "Specialization": "asdfd",
-        "School": "asdfv",
-        "UniversityAdmissionScore": 234,
-        "Skills": "sdcxv",
-        "CompaniesWorkedAt": "asdfd",
-        "StartDate": "2019-04-04T00:00:00",
-        "EndDate": "2019-05-05T00:00:00",
-        "ForeignLanguages": [
-          "asdsf"
-        ],
-        "DifferentiationDiploma": false,
-        "GitHubLink": "asdf",
-        "LinkedInProfileLink": "asdf"
-      }
-    ],
+    "Cv": null,
+    "Id": "00000000-0000-0000-0000-000000000000",
     "City": "",
     "Phone": "",
     "Age": 2021,
@@ -82,6 +53,20 @@
     "Username": "3",
     "Pasword": "3",
     "BirthDate": "0003-03-03T00:00:00",
+    "nofc": null
+  },
+  {
+    "Cv": null,
+    "Id": "1804da70-869e-41d2-acd4-c0a1960e9058",
+    "City": "Baku",
+    "Phone": "0515880319",
+    "Age": 19,
+    "FirstName": "Miir",
+    "LastName": "Emirli",
+    "Email": "miri976y@gmail.com",
+    "Username": "miri2",
+    "Pasword": "1234",
+    "BirthDate": "2005-04-07T00:00:00",
     "nofc": null
   }
 ]
