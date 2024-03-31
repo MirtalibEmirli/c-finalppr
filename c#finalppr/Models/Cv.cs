@@ -9,7 +9,7 @@ namespace c_finalppr.Models;
 
 public class Cv
 {
-    public bool visibility { get; set; } = false;  
+      
     // İxtisas
     public string Specialization { get; set; }
 

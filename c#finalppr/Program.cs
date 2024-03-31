@@ -68,6 +68,9 @@ string[] sigininmenu =
 string[] sigininadminmenu =
 {
                   "\t\t\t\t => Apply Vacancie",
+                  "\t\t\t\t => Delete Vacancie ",
+                  "\t\t\t\t => Delete Worker",
+                  "\t\t\t\t => Delete Employer ",
                    "\t\t\t\t => Exit",
 };
 string[] signinworker =
@@ -82,15 +85,10 @@ string[] signInEmployer =
 {
                    "\t\t\t\t => Add vacancie",
                    "\t\t\t\t => All vacancies",
-                   "\t\t\t\t => Delete vacancie ",
                    "\t\t\t\t => Apply worker" ,
                    "\t\t\t\t => Notifilications",
                    "\t\t\t\t => Exit"
 };
-//bunun apply worker hissesi ilk once notfa baxib gorecekki kimse add cv edib ve o adamin adina uygun cv ni tapmaliyiq 
-// Appliedworkers bu adi otureremdeye rahatca workers.json dan bu ada uygun gelen adamin aftomatik cv si gelecek ve bura girende 
-//bu list var deye ve evvelde all workersi gore bilirdi deye adlar cxmalidir ve hansini isdese onunn adini secib cv sine baxmalidir
-//baxandan sonra ise durub workere mail gedmelidir bda asanndri mail var ve workerin notf si var ve sadece notf qebul edir fsyo 
 string[] filter =
 {
                    "\t\t\t\t => City",
@@ -98,16 +96,17 @@ string[] filter =
                    "\t\t\t\t => Work" ,
                    "\t\t\t\t => Experience" ,
 };
-Admin admin1 = new Admin("mirtalibemirli598@gmail.com","adminm","1234");
+
 #endregion
+Admin admin1 = new Admin("mirtalibemirli598@gmail.com", "adminm", "1234");
 
 //------------------------------------------START-----------------------------------------------------------------
 Firstentering();
-//ApplyCv();
 
-//Managefilter();
+
+
 //----------------------------------------------------------------------------------------------------------------
-void mailing(string mail,string ms)
+void mailing(string mail, string ms)
 {
 
     string senderEmail = "mirtalibemirli498@gmail.com";
@@ -141,7 +140,7 @@ void mailing(string mail,string ms)
                 Console.Write("Enter a code you accepted from Admin => ");
                 int testcode = Convert.ToInt32(Console.ReadLine());
                 if (testcode == msg)
-                    Console.WriteLine("You are registered sucsessfully.");
+                    Console.WriteLine("Your code is true ");
                 else
                 {
                     Console.WriteLine("You don't registered .");
@@ -155,7 +154,7 @@ void mailing(string mail,string ms)
     }
 }
 
-void mailing2(string mail, string ms,string subject)
+void mailing2(string mail, string ms, string subject)
 {
 
     string senderEmail = "mirtalibemirli498@gmail.com";
@@ -186,7 +185,7 @@ void mailing2(string mail, string ms,string subject)
             try
             {
                 smtpClient.Send(mailMessage);
-               
+
             }
             catch (Exception ex)
             {
@@ -299,46 +298,11 @@ int ManageMenu(string[] items)
 }
 
 //-----------------------
-int Managefilter()
-{
-    int choice = 0;
-    showmenu2(choice, filter);
-    while (true)
-    {
-        ConsoleKeyInfo key = Console.ReadKey();
-        Console.Clear();
-        int a = Movemenu(ref choice, filter, key, out int sz);
-        if (a == 1)
-        {
-            return choice;
-        }
-        else if (a == 0)
-        {
-            ConsoleKeyInfo key2 = Console.ReadKey();
-
-            if (choice == 0 && key2.Key == ConsoleKey.Enter)
-            {
-                Console.ReadLine();
-                Console.ReadKey();
-                showmenu2(choice, filter);
-
-            }
-            else
-            {
-                showmenu2(choice, filter);
-            }
-
-        }
-
-    }
-
-    return 0;
-}
-
 
 void Firstentering()
 {
 menuadmin1:
+    Console.Title = "Boss.az";
     Console.Clear();
     Console.ForegroundColor = ConsoleColor.Magenta;
     Console.BackgroundColor = ConsoleColor.Gray;
@@ -416,6 +380,7 @@ void SignupWorker()
         string? name, city, surname, phone, username, mail, password;
         string? name1, surname1, phone1, username1, mail1, password1;
         int day, mon, yr, age;
+        int day1, mon1, yr1, age1;
         Console.ForegroundColor = ConsoleColor.Cyan;
         Console.Write("FirstName =>");
         name = Console.ReadLine();
@@ -431,10 +396,10 @@ void SignupWorker()
             regexh("Ad boyuk herfle yazilmalidir");
             goto name;
         }
-        #endregion
+    #endregion
 
-        surname:
-        Console.ForegroundColor = ConsoleColor.Cyan;    
+    surname:
+        Console.ForegroundColor = ConsoleColor.Cyan;
         Console.Write("Lastname =>");
         surname = Console.ReadLine();
 
@@ -455,7 +420,7 @@ void SignupWorker()
     maill:
         Console.ForegroundColor = ConsoleColor.Green;
         Console.Write("Mail =>");
-       mail = Console.ReadLine();
+        mail = Console.ReadLine();
         string regexmail = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
         if (Regex.IsMatch(mail, regexmail))
         {
@@ -466,13 +431,13 @@ void SignupWorker()
             regexh("Mailde duzgun yazilmayib ex: someone@gmail.com ");
             goto maill;
         }
-        mailing(mail1,"Register");
+        mailing(mail1, "Register");
         #endregion
 
         Console.Write("City =>");
         city = Console.ReadLine();
 
-       
+
     phone:
         Console.ForegroundColor = ConsoleColor.Cyan;
 
@@ -504,11 +469,11 @@ void SignupWorker()
         Console.Write("Birth day =>");
         day = Convert.ToInt32(Console.ReadLine());
 
-        string regexDeseni = @"^([1-9]|[12]\d|30)$";
+        string regexDay = @"^([1-9]|[12]\d|30)$";
 
-        if (Regex.IsMatch(day.ToString(), regexDeseni))
+        if (Regex.IsMatch(day.ToString(), regexDay))
         {
-            Console.WriteLine("Girdiğiniz değer regex desenine uygun.");
+            day1 = day;
         }
         else
         {
@@ -519,12 +484,24 @@ void SignupWorker()
 
         Console.Write("Birth month =>");
         mon = Convert.ToInt32(Console.ReadLine());
+        string regexMon = @"^(0?[1-9]|1[0-2])$";
+
+        if (Regex.IsMatch(day.ToString(), regexMon))
+        {
+            day1 = day;
+        }
+        else
+        {
+            regexh("Ay 1 ve 12 arasi olmalidir!!");
+            goto days;
+        }
+
 
         Console.Write("Birth year =>");
         yr = Convert.ToInt32(Console.ReadLine());
         age = 2024 - yr;
 
-        DateTime birthdate1 = new DateTime(yr, mon, day);
+        DateTime birthdate1 = new DateTime(yr, mon, day1);
         Worker w1 = new Worker(name1, surname1, mail1, username, password, birthdate1, city, phone, age);
         Database1<Worker> db1 = new Database1<Worker>("../../../Workers.json");
         db1.Values.Add(w1);
@@ -651,12 +628,13 @@ void SignupEmployer()
             regexh("Mailde duzgun yazilmayib ex: someone@gmail.com");
             goto maill;
         }
-        mailing(mail1, "Register"   );
+        mailing(mail1, "Register");
         #endregion
 
-        Employr e1 = new Employr(name1, surname1, city, phone1, age1,mail1);
+        Employr e1 = new Employr(name1, surname1, city, phone1, age1, mail1);
+        e1.Mail = mail1;
         Database1<Employr> dbe = new Database1<Employr>("../../../Employers.json");
-        dbe.Values.Add(e1 );  
+        dbe.Values.Add(e1);
         dbe.SaveData();
         Resuming();
 
@@ -721,12 +699,12 @@ void regexh(string mes)
 
 void SignIn()
 {
-    SignIn:
+SignIn:
     Console.Clear();
-   
+
 
     int choice = ManageMenu(sigininmenu);
-    if (choice ==0)
+    if (choice == 0)
     {
         siginworker();
         goto SignIn;
@@ -734,20 +712,21 @@ void SignIn()
     }
 
 
-    else if(choice == 1)
+    else if (choice == 1)
     {
         SignInEmployer();
         goto SignIn;
 
     }
-    else if(choice == 2)
+    else if (choice == 2)
     {
         signinadmin();
 
         goto SignIn;
     }
-    else if(choice==3){
-    
+    else if (choice == 3)
+    {
+
     }
 
 
@@ -757,24 +736,191 @@ void SignIn()
 void signinadmin()
 {
     Console.Clear();
+    Console.ForegroundColor = ConsoleColor.Magenta;
+    Console.WriteLine(fon5);
+    Console.ForegroundColor = ConsoleColor.White;
+
+    Console.ForegroundColor = ConsoleColor.Yellow;
+
     Console.Write("Enter username => ");
     string? username = Console.ReadLine();
     Console.Write("Enter password => ");
     string? pasw = Console.ReadLine();
+    Console.ForegroundColor = ConsoleColor.White;
 
-    if(username==admin1.Username&&pasw==admin1.Password) { 
-    
-                                                                                                   
+    Console.Clear();
+
+    Database1<Employr> dbw = new Database1<Employr>("../../../Employers.json");
+
+    var value = dbw.Values;
+
+
+    bool k = false;
+    if (admin1.Username == username && admin1.Password == pasw)
+    {
+    Db:
+        k = true;
+        Console.Clear();
+
+        int choice = ManageMenu(sigininadminmenu);
+
+        if (choice == 0)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            foreach (Employr db in value)
+            {
+                db.vacancies.ForEach(a => Console.WriteLine(a));
+            }
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Green;
+
+            Console.WriteLine("If you want apply Press 'Enter ' or presss any key for 'Exit'");
+            ConsoleKeyInfo kk = Console.ReadKey(true);
+            if (kk.Key == ConsoleKey.Enter)
+            {
+                Console.Write("ID of Vacancie (Please copy and Paste) => ");
+                string id = Console.ReadLine();
+                foreach (Employr db in value)
+                {
+                    foreach (var item12 in db.vacancies)
+                    {
+                        if (item12.Id.ToString() == id)
+                        {
+                            item12.visibility = true;
+                            dbw.SaveData();
+                        }
+                    }
+                }
+                Console.ForegroundColor = ConsoleColor.White;
+
+                Resuming();
+
+            }
+        }
+        else if (choice == 1)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            foreach (Employr db in value)
+            {
+                db.vacancies.ForEach(a => Console.WriteLine(a));
+            }
+            Console.ForegroundColor = ConsoleColor.White;
+
+            Console.ForegroundColor = ConsoleColor.Green;
+
+            Console.WriteLine("If you want apply Press 'Enter ' or presss any key for 'Exit'");
+            ConsoleKeyInfo kk = Console.ReadKey(true);
+            if (kk.Key == ConsoleKey.Enter)
+            {
+                Console.Write("ID of Vacancie (Please copy and Paste) => ");
+                string id = Console.ReadLine();
+                foreach (Employr db in value)
+                {
+                    foreach (var item12 in db.vacancies)
+                    {
+                        if (item12.Id.ToString() == id)
+                        {
+                            item12.visibility = false;
+                            dbw.SaveData();
+                        }
+                    }
+                }
+                Console.ForegroundColor = ConsoleColor.White;
+
+                Resuming();
+
+            }
+        }
+        else if (choice == 2)
+        {
+
+            Database1<Worker> dbw1 = new Database1<Worker>("../../../Workers.json");
+
+            var value1 = dbw1.Values;
+
+
+
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            foreach (Worker db in value1)
+            {
+                Console.WriteLine(db);
+            }
+            Console.ForegroundColor = ConsoleColor.White;
+
+            Console.ForegroundColor = ConsoleColor.Green;
+
+            Console.WriteLine("If you want delete Press 'Enter ' or presss any key for 'Exit'");
+            ConsoleKeyInfo kk = Console.ReadKey(true);
+            if (kk.Key == ConsoleKey.Enter)
+            {
+                Console.Write("ID of Worker (Please copy and Paste) => ");
+                string? id = Console.ReadLine();
+                if (value1 is not null)
+                    for (int i = 0; i < value1.Count; i++)
+                    {
+                        if (value1.ElementAt(i).Id.ToString() == id)
+                        {
+                            dbw1.Values.Remove(value1.ElementAt(i));
+                            dbw1.SaveData();
+                        }
+                    }
+
+            }
+
+        }
+        else if (choice == 3)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            foreach (Employr db in value)
+            {
+                Console.WriteLine(db);
+                Console.WriteLine();
+            }
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Green;
+
+            Console.WriteLine("If you want delete Press 'Enter ' or presss any key for 'Exit'");
+            ConsoleKeyInfo kk = Console.ReadKey(true);
+            if (kk.Key == ConsoleKey.Enter)
+            {
+                Console.Write("ID of Employer (Please copy and Paste) => ");
+                string id = Console.ReadLine();
+                if (value is not null)
+                    for (int i = 0; i < value.Count; i++)
+                    {
+                        if (value.ElementAt(i).Id.ToString() == id)
+                        {
+                            dbw.Values.Remove(value.ElementAt(i));
+                            dbw.SaveData();
+                        }
+                    }
+
+                Console.ForegroundColor = ConsoleColor.White;
+
+                Resuming();
+
+            }
+
+        }
+        else if (choice == 4)
+        {
+            return;
+        }
+        goto Db;
+
+
     }
-    else
+
+    if (!k)
     {
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("Incorrect entering");
         Console.ForegroundColor = ConsoleColor.White;
         Resuming();
     }
-}
 
+
+}
 
 void siginworker()
 {
@@ -799,10 +945,11 @@ void siginworker()
     foreach (var item in value)
     {
 
-        if (item.Username==username&&item.Pasword==pasw)
+        if (item.Username == username && item.Pasword == pasw)
         {
+        wd:
             k = true;
-
+            Console.Clear();
             /*"```````         "\t\t\t\t => Notifilications", */
 
             int choice = ManageMenu(signinworker);
@@ -811,23 +958,27 @@ void siginworker()
                 Cv cv1 = AddCv();
                 item.Cv = cv1;
                 dbw.SaveData();
-
             }
 
             else if (choice == 1)
             {
                 ApplyCv(item);
+
             }
             else if (choice == 2)
             {
 
+                item.notfy.ForEach(a => Console.WriteLine(a));
+                Resuming();
+
             }
             else if (choice == 3)
             {
+                return;
+            }
 
-            } 
-            
-            
+            goto wd;
+
         }
 
     }
@@ -839,30 +990,147 @@ void siginworker()
         Resuming();
 
     }
-    
+
 }
 
 void SignInEmployer()
 {
     Console.Clear();
-    Console.Write("Enter username => ");
-    string? name = Console.ReadLine();
-    Console.Write("Enter password => ");
-    string? surname = Console.ReadLine();
+    Console.ForegroundColor = ConsoleColor.Magenta;
+    Console.WriteLine(fon5);
+    Console.ForegroundColor = ConsoleColor.White;
 
-    Database1<Employr> dbw = new Database1<Employr>("../../../Emplyers.json");
+    Console.ForegroundColor = ConsoleColor.Yellow;
+
+    Console.Write("Enter Name => ");
+    string? name = Console.ReadLine();
+    Console.Write("Enter surname => ");
+    string? surname = Console.ReadLine();
+    Console.ForegroundColor = ConsoleColor.White;
+
+
+    Console.Clear();
+
+
+    Database1<Employr> dbw = new Database1<Employr>("../../../Employers.json");
     var value = dbw.Values;
     bool k = false;
     foreach (var item in value)
     {
-        if (item.Name ==name && item.Surname == surname)
+        if (item.Name == name && item.Surname == surname)
         {
+        Db:
             k = true;
+            Console.Clear();
+
+            int choice = ManageMenu(signInEmployer);
+            /*
+
+                               "\t\t\t\t => Add vacancie",
+                               "\t\t\t\t => All vacancies",
+                               "\t\t\t\t => Apply worker" ,
+                               "\t\t\t\t => Notifilications",
+                               "\t\t\t\t => Exit"
+             */
+
+            if (choice == 0)
+            {
+                string work, city, experience;
+                List<string> demands = new List<string>();
+                int salary;
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Enter work name ");
+                work = Console.ReadLine();
+                Console.WriteLine("Enter work City ");
+                city = Console.ReadLine();
+                Console.WriteLine("Enter work experience ");
+                experience = Console.ReadLine();
+                Console.WriteLine("Enter work salary ");
+                salary = Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine("Enter Demands (Write exit for exiting):");
+
+                while (true)
+                {
+                    Console.Write("Demand: ");
+                    string? demand = Console.ReadLine();
+
+                    if (demand.ToLower() == "exit")
+                        break;
+
+                    if (demand is not null)
+                    {
+                        demands.Add(demand);
+
+                    }
+                }
+                Console.ForegroundColor = ConsoleColor.White;
+
+                Console.WriteLine();
+                Vacancie v1 = new Vacancie(work, salary, city, experience, demands);
+                item.vacancies.Add(v1);
+                dbw.SaveData();
+                Resuming();
+
+            }
+            else if (choice == 1)
+            {
+                item.vacancies.ForEach(a =>
+                {
+                    if (a.visibility == true)
+                        Console.WriteLine(a);
+                });
+                Resuming();
+
+            }
+            else if (choice == 2)
+            {
+
+                ///employer jsondan applied workeri sil
+                //prp
+                item.Appliedworkers.ForEach(a =>
+                {
+                    Console.WriteLine(a);
+                });
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.Write("Apply edmek isdedyiniz Workerin Ad ni daxil edin ");
+                Console.ForegroundColor = ConsoleColor.White;
+
+                string? name3 = Console.ReadLine();
+                Database1<Worker> dbworker = new Database1<Worker>("../../../Workers.json");
+                var workerlist = dbworker.Values;
+                foreach (var item3 in workerlist)
+                {
+                    if (name3 == item3.FirstName)
+                    {
+                        string message = $"{item.Name} Verify you.Congrats!";
+                        item3.notfy.Add(message);
+                        mailing2(item3.Email, message, "Work Verifiyng");
+                        item.Appliedworkers.Remove(item3);
+                        dbw.SaveData();
+                        dbworker.SaveData();
+                    }
+
+                }
+                Resuming();
+
+            }
+            else if (choice == 3)
+            {
+                item.notfy.ForEach(a => Console.WriteLine(a));
+                Resuming();
+            }
+
+            else if (choice == 4)
+            {
+                return;
+            }
+
+            goto Db;
 
         }
-
     }
-    if (k)
+    if (!k)
     {
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("Incorrect entering");
@@ -873,7 +1141,7 @@ void SignInEmployer()
 }
 
 Cv AddCv()
-{
+{Console.ForegroundColor = ConsoleColor.Cyan;    
 
     Console.WriteLine("Please enter your specialization:");
     string? specialization = Console.ReadLine();
@@ -925,12 +1193,12 @@ Cv AddCv()
     Console.WriteLine("Please enter your LinkedIn profile link:");
     string? linkedInProfileLink = Console.ReadLine();
 
-    Cv cv1 = new Cv(specialization,school,universityAdmissionScore,skills,
+    Cv cv1 = new Cv(specialization, school, universityAdmissionScore, skills,
         companiesWorkedAt, startDate, endDate,
-        foreignLanguages,differentiationDiploma,
-        gitHubLink,linkedInProfileLink);
+        foreignLanguages, differentiationDiploma,
+        gitHubLink, linkedInProfileLink);
 
-
+    Console.ForegroundColor = ConsoleColor.White;
     return cv1;
 }
 
@@ -940,33 +1208,41 @@ void ApplyCv(dynamic item1)
     var employers = dbv.Values;
     foreach (var item in employers)
     {
+        var vacancies = item.vacancies;
+
         Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.WriteLine(item.vacancies.ToString());
+        vacancies.ForEach(a =>
+        {
+            if (a.visibility == true)
+                Console.WriteLine(a);
+        }
+        );
         Console.ForegroundColor = ConsoleColor.White;
 
     }
+
     Console.WriteLine("If you want apply Press 'Enter ' or presss any key and 'Exit'");
-   ConsoleKeyInfo kk =  Console.ReadKey(true);
+    ConsoleKeyInfo kk = Console.ReadKey(true);
     if (kk.Key == ConsoleKey.Enter)
     {
         Console.Write("ID of Vacancie (Please copy and Paste) => ");
         string id = Console.ReadLine();
         for (int i = 0; i < employers.Count; i++)
         {
-            var vc = employers.ElementAt(i).vacancies.ToList();
+            var vc = employers.ElementAt(i).vacancies;
             for (int j = 0; j < vc.Count; j++)
             {
                 if (vc.ElementAt(j).Id.ToString() == id)
                 {
-                    string employermessage = $"{item1.Username} is Applied your {vc.ElementAt(j).Work} Vacancie";
+                    string employermessage = $"{item1.FirstName} is Applied your {vc.ElementAt(j).Work} Vacancie";
                     employers.ElementAt(i).notfy.Add(employermessage);
-                    employers.ElementAt(i).Appliedworkers.Add(item1.FirstName);
-                   mailing2(employers.ElementAt(i).Mail, employermessage,"You have mail about Vacancies");
-
+                    employers.ElementAt(i).Appliedworkers.Add(item1);
+                    mailing2(employers.ElementAt(i).Mail, employermessage, "You have mail about Vacancies");
+                    dbv.SaveData();
                     Console.WriteLine("You applied sucsess");
                 }
             }
-           
+
         }
     }
     else
@@ -975,3 +1251,5 @@ void ApplyCv(dynamic item1)
     }
     Resuming();
 }
+
+

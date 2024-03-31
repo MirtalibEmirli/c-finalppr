@@ -9,7 +9,7 @@ namespace c_finalppr.Models;
 public class Vacancie
 {
     public Guid Id { get; set; }
-    
+    public bool visibility { get; set; } = false; 
     public string Work { get; set; }
     public string Experience { get; set; }
     public string City { get; set; }
@@ -30,7 +30,7 @@ public class Vacancie
     public override string ToString()
     {
         string demandsString = string.Join(", ", Demands);
-        return $"Id: {Id}\nWork: {Work}\nExperience: {Experience}\nCity: {City}\nSalary:{Salary}\nDemands:\n\n {demandsString}";
+        return $"Id: {Id}\nWork: {Work}\nExperience: {Experience}\nCity: {City}\nSalary:{Salary}\nDemands:\n {demandsString}";
     }
 
   

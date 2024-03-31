@@ -1,20 +1,26 @@
 [
   {
-    "Id": "144fecce-afd8-40ed-bf31-b026fd6175b3",
-    "Name": "Raver",
-    "Surname": "Group",
-    "City": "Dc",
-    "Phone": "\u002B9874521459",
-    "Age": 46,
-    "vacancies": []
-  },
-  {
-    "Id": "5d7cf496-72c9-444b-8935-c3ee22de046b",
-    "Name": "Eli",
-    "Surname": "Abilov",
-    "City": "Baki",
-    "Phone": "0779121212",
+    "Id": "14171229-e0fd-4e78-98b6-d90f036f0e30",
+    "Name": "Adil",
+    "Mail": "mqul21810@gmail.com",
+    "Surname": "Akberov",
+    "City": "Baku",
+    "Phone": "0515961212",
     "Age": 29,
-    "vacancies": []
+    "vacancies": [
+      {
+        "Id": "ea45ce27-e1e0-48ca-8aba-58677a913ff7",
+        "visibility": true,
+        "Work": "Systemadmin",
+        "Experience": "1 year",
+        "City": "Baku",
+        "Salary": 1500,
+        "Demands": [
+          "Responsible"
+        ]
+      }
+    ],
+    "notfy": [],
+    "Appliedworkers": []
   }
 ]

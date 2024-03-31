@@ -1,72 +1,31 @@
 [
   {
-    "Cv": null,
-    "Id": "00000000-0000-0000-0000-000000000000",
-    "City": "",
-    "Phone": "",
-    "Age": 19,
-    "FirstName": "",
-    "LastName": "",
-    "Email": "",
-    "Username": "",
-    "Pasword": "",
-    "BirthDate": "2005-04-04T00:00:00",
-    "nofc": null
-  },
-  {
-    "Cv": null,
-    "Id": "00000000-0000-0000-0000-000000000000",
-    "City": "",
-    "Phone": "",
-    "Age": 2021,
-    "FirstName": "",
-    "LastName": "",
-    "Email": "",
-    "Username": "",
-    "Pasword": "",
-    "BirthDate": "0003-03-03T00:00:00",
-    "nofc": null
-  },
-  {
-    "Cv": null,
-    "Id": "00000000-0000-0000-0000-000000000000",
-    "City": "",
-    "Phone": "",
-    "Age": 2021,
-    "FirstName": "e",
-    "LastName": "",
-    "Email": "",
-    "Username": "",
-    "Pasword": "",
-    "BirthDate": "0003-03-03T00:00:00",
-    "nofc": null
-  },
-  {
-    "Cv": null,
-    "Id": "00000000-0000-0000-0000-000000000000",
-    "City": "",
-    "Phone": "",
-    "Age": 2021,
-    "FirstName": "3",
-    "LastName": "",
-    "Email": "",
-    "Username": "3",
-    "Pasword": "3",
-    "BirthDate": "0003-03-03T00:00:00",
-    "nofc": null
-  },
-  {
-    "Cv": null,
-    "Id": "1804da70-869e-41d2-acd4-c0a1960e9058",
+    "Cv": {
+      "Specialization": "Systemadmin",
+      "School": "Baku213",
+      "UniversityAdmissionScore": 90.2,
+      "Skills": "C#,Cisco",
+      "CompaniesWorkedAt": "PAshabank",
+      "StartDate": "2020-12-14T00:00:00",
+      "EndDate": "2022-12-14T00:00:00",
+      "ForeignLanguages": [
+        "English",
+        "Russian"
+      ],
+      "DifferentiationDiploma": false,
+      "GitHubLink": "ali@github",
+      "LinkedInProfileLink": "ali@linkdn"
+    },
+    "Id": "8dc5d9f5-3218-41aa-85ba-43ec1db744d6",
     "City": "Baku",
-    "Phone": "0515880319",
-    "Age": 19,
-    "FirstName": "Miir",
-    "LastName": "Emirli",
+    "Phone": "0512121212",
+    "Age": 24,
+    "FirstName": "Ali",
+    "LastName": "Aliyev",
     "Email": "miri976y@gmail.com",
-    "Username": "miri2",
-    "Pasword": "1234",
-    "BirthDate": "2005-04-07T00:00:00",
-    "nofc": null
+    "Username": "ali1",
+    "Pasword": "1212",
+    "BirthDate": "2000-04-07T00:00:00",
+    "notfy": []
   }
 ]

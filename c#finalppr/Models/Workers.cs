@@ -22,8 +22,7 @@ public class Worker
     public string Username { get; set; }
     public string Pasword { get; set; }
     public DateTime BirthDate { get; init; }
-    public string nofc { get; set; }
-    public List<string> notfy = new List<string>();
+    public List<string> notfy { get; init; } = new List<string> ();
 
     public Worker(string firstName, string lastName, string email, string username, string pasw, DateTime birthDate, string city, string phone, int age)
     {

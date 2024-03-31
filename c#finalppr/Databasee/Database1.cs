@@ -20,24 +20,14 @@ internal class Database1<T>
             var options = new JsonSerializerOptions();
             options.WriteIndented = true;
             Values = JsonSerializer.Deserialize<List<T>>(jsonText, options);
+
         }
         else
         {
 
         }
     }
-    /*
-    public void ShowWorkers()
-    {
-        string jsonText = File.ReadAllText(Fname);
-        var options = new JsonSerializerOptions();
-        options.WriteIndented = true;
-        Values = JsonSerializer.Deserialize<List<T>>(jsonText, options);
-        foreach (var item in Values)
-        {
-            Console.WriteLine(item);
-        }
-    }*/
+    
 
     public List<T> Values { get; set; } = new List<T>();
 

@@ -26,8 +26,8 @@ public class Employr
             vacancies[i] = value ?? null;
         }
     }
-    public List<string> notfy = new List<string>();
-    public List<string> Appliedworkers = new List<string>();
+    public List<string> notfy { get; set; } = new List<string>();
+    public List<Worker> Appliedworkers { get; set; } = new List<Worker>();
     public Employr(string name, string surname, string city, string phone, int age,string mail)
     {
         Id = Guid.NewGuid();
@@ -36,13 +36,13 @@ public class Employr
         City = city;
         Phone = phone;
         Age = age;
-        Mail = Mail;
+        Mail = mail;
     }
     public Employr() { }
 
     public override string ToString()
     {
-        return $"Id: {Id}\nName: {Name}, Surname: {Surname}, City: {City}, Phone: {Phone}, Age: {Age} Vacancies: {string.Join(", ", vacancies)} \n";
+        return $"Id: {Id}\nName: {Name}, Surname: {Surname}, City: {City}, Phone: {Phone}, Age: {Age} \nVacancies:\n {string.Join(", ", vacancies)} \n";
     }
 
 }
